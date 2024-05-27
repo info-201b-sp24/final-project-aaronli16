@@ -2,9 +2,11 @@ library(shiny)
 library(ggplot2)
 library(dplyr)
 
-server <- function(input, output) {
+server <- function(input, output, session) {
+  # Load the data
   data <- read.csv("https://drive.google.com/uc?export=download&id=1skt9wt6XkT1O8zBC3DKvZG988pnHKGC_")
   
+  # Rename columns
   names(data) <- c('Timestamp', 'Sex', 'Avg_GPA', 'Grade', 'Major',
                    'Avg_GPA_2023', 'Accommodation_Status', 'Monthly_Allowance',
                    'Scholarship_2023', 'Study_Hours_Per_Week', 'Party_Frequency',
@@ -12,6 +14,7 @@ server <- function(input, output) {
                    'Classes_Failed', 'Romantic_Relationship', 'Parental_Approval_Alcohol',
                    'Relationship_With_Parents')
   
+  # Clean data
   data$Major[data$Major == "" | is.na(data$Major)] <- "Undecided"
   data$Major <- as.factor(data$Major)
   
@@ -28,18 +31,30 @@ server <- function(input, output) {
   
   data$Drinks_Per_Night_Out <- sapply(data$Drinks_Per_Night_Out, clean_drinks)
   
+  # Summarize data
   average_drinks_per_major <- data %>%
     group_by(Major) %>%
     summarise(Average_Drinks = mean(Drinks_Per_Night_Out, na.rm = TRUE))
   
-  average_drinks_per_major$Major <- factor(average_drinks_per_major$Major, levels = unique(average_drinks_per_major$Major))
+  # Update the choices for the selectInput
+  updateSelectInput(session, "selected_major", choices = c("All" = "All", setNames(unique(average_drinks_per_major$Major), unique(average_drinks_per_major$Major))))
   
+  # Filter data based on selected major
+  filtered_data <- reactive({
+    if (input$selected_major == "All") {
+      return(average_drinks_per_major)
+    } else {
+      return(average_drinks_per_major %>% filter(Major == input$selected_major))
+    }
+  })
+  
+  # Plot output
   output$barChart <- renderPlot({
-    ggplot(average_drinks_per_major, aes(x = Major, y = Average_Drinks, fill = Major)) +
+    ggplot(filtered_data(), aes(x = Major, y = Average_Drinks, fill = Major)) +
       geom_bar(stat = "identity", color = "black", show.legend = FALSE) +
       geom_text(aes(label = round(Average_Drinks, 2)), vjust = -0.5, size = 5) +
       theme_minimal() +
-      labs(title = "Average Number of Drinks Consumed Per Night by Major ",
+      labs(title = "Average Number of Drinks Consumed Per Night by Major",
            x = "Major", y = "Average Drinks Per Night Out") +
       theme(axis.title.x = element_text(size = 15),
             axis.title.y = element_text(size = 15),
@@ -52,9 +67,3 @@ server <- function(input, output) {
 }
 
 shinyApp(ui = ui, server = server)
-
-
-
-library(rsconnect)
-deployApp()
-runApp()
