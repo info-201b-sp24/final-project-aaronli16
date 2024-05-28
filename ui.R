@@ -8,17 +8,24 @@ ui <- navbarPage("Student Alcohol Consumption",
       
     )
   ),
-  tabPanel("Alcohol Consumption by Major",
-    fluidPage(
-      titlePanel("How the Majors Consume Alcohol"),
-      p("This bar chart shows the average number of drinks consumed per night out by students from different majors."),
-      p("Description: I chose to use a bar chart to depict the data between average drinks per night out and major because it is easy to read and understand..."),
-      p("Insights: When looking at the Bar chart, Law and Agricultural Sciences seem to stand out as outliers in drinking..."),
-      selectInput("selected_major", "Select Major:", choices = NULL),
-      plotOutput("barChart")
-    )
+  tabPanel("Major and School Year",
+           fluidPage(
+             titlePanel("Average Drinks Per Week by Major and School Year"),
+             sidebarLayout(
+               sidebarPanel(
+                 checkboxGroupInput("selected_majors", "Select Majors:",
+                                    choices = NULL,
+                                    selected = NULL),
+                 checkboxGroupInput("selected_years", "Select School Years:",
+                                    choices = NULL,
+                                    selected = NULL)
+               ),
+               mainPanel(
+                 plotOutput("barChart")
+               )
+             )
+           )
   )
-  
 )
 
 

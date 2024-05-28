@@ -2,25 +2,6 @@ library(shiny)
 library(ggplot2)
 library(dplyr)
 
-
-ui <- fluidPage(
-  titlePanel("Average Drinks Per Week by Major and School Year"),
-  sidebarLayout(
-    sidebarPanel(
-      checkboxGroupInput("selected_majors", "Select Majors:",
-                         choices = NULL,
-                         selected = NULL),
-      checkboxGroupInput("selected_years", "Select School Years:",
-                         choices = NULL,
-                         selected = NULL)
-    ),
-    mainPanel(
-      plotOutput("barChart")
-    )
-  )
-)
-
-
 server <- function(input, output, session) {
   
   data <- read.csv("https://drive.google.com/uc?export=download&id=1skt9wt6XkT1O8zBC3DKvZG988pnHKGC_")
@@ -78,4 +59,3 @@ server <- function(input, output, session) {
 }
 
 
-shinyApp(ui = ui, server = server)
