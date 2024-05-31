@@ -1,44 +1,33 @@
-# Title of Your Final Project Here 
+# Student Alcohol Consumption: At a Glance
 ## INFO 201 "Foundational Skills for Data Science"
 
-Authors: Your names here
+Authors: Evan Sun, Aaron Li, Arvin, Annie
 
-
-For the Final Project -- Data Wrangling, add the following to this code repository:
-
-* An R script file containing the code you used to create your unified dataset 
-* Your unified and cleaned CSV dataset file
-* Data Nutrition Label (pdf) 
-
-
-**Link: Link to your Shiny App here**
-
-Please create the necessary files for your multi-page Shiny app in this GitHub repository. Consult the Canvas assignment for more details. Be sure to publish your app on Shinyapps.io.
-
-When you are finished, please add the text from your introductory and concluding pages below. You might want to use this GitHub repository as part of your digital portfolio, so you want this README.md to offer a brief description of the project and key takeaways.
-
-Feel free to delete these instructions for your final README.md file and to make your GitHub repository public if you would like others to be able to see it. 
+**Link: [Link to shinyapp](https://sunev.shinyapps.io/final-project-aaronli16/)**
 
 # Introduction
-This is our study on 'Student Alcohol Consumption: At a Glance'. This project that we did aimed to analyze the patterns and trends of alcohol consumption by students based on many factors for example their major, academic performance, and parental influence. The data for this study was sourced from a publicly available dataset on Kaggle, titled 'Student Alcohol Consumption' which contains responses from students regarding their drinking habits, academic performance, and various personal and demographic factors which they got through surveys.
+This is our study on 'Student Alcohol Consumption: At a Glance'. This project aims to analyze the patterns and trends of alcohol consumption by students based on factors like their major, academic performance, and parental influence. The data for this study is sourced from a publicly available dataset on Kaggle, 'Student Alcohol Consumption,' containing responses from students regarding their drinking habits, academic performance, and various personal and demographic factors via surveys.
 
 The major questions we seek to answer through this analysis are:
-- How does alcohol consumption correlate with a student's major?
-- How does alcohol consumption correlate with grades in each major?
-- How do parents affect a student’s alcohol consumption?
+  - How does alcohol consumption correlate with a student's major and year?
+  - How does alcohol consumption affect a student's performance in school?
+  - How do the people around a student affect a student’s alcohol consumption?
 
-The dataset has a diverse range of variables that provide us with a comprehensive view of the students' backgrounds, study habits, and social behaviors. By examining these variables, we hope to uncover some insights into how different factors influence alcohol consumption among students in universities.
+The dataset provides a comprehensive view of students' backgrounds, study habits, and social behaviors. By examining these variables, we hope to uncover insights into how different factors influence alcohol consumption among university students.
+
 It's important to consider some ethical questions and limitations associated with this dataset. The data is self-reported, which may introduce biases or inaccuracies. Also, the sensitive nature of personal information requires careful handling to ensure privacy and confidentiality.
-For a more detailed exploration of the dataset that we used for our findings, please navigate through the interactive pages of this Shiny application. We hope this project not only provides valuable insights but also encourages further discussion and research on the impact of alcohol consumption on students' academic and personal lives.
-Our dataset is from: "https://www.kaggle.com/datasets/joshuanaude/url", "Kaggle Dataset: Student Alcohol Consumption
+
+For a more detailed exploration of the dataset, please navigate through the interactive pages of this Shiny application. We hope this project not only provides valuable insights but also encourages further discussion and research on the impact of alcohol consumption on students' academic and personal lives
 
 
 # Conclusion / Summary Takeaways
-After doing analysis of the dataset, we got some key takeaways regarding the patterns of alcohol consumption among students. Firstly, we found a significant correlation and connection between a student's major and their drinking habits. Students from certain majors reported higher average alcohol consumption compared to their peers and students in other disciplines. This trend could be because of various cultural and social factors which exist within different fields of study.
+After analyzing the dataset, we identified key takeaways regarding patterns of alcohol consumption among students. Firstly, we found that 4th year Agricultural Science majors and postgraduate Engineers reported some of the highest average weekly intake across all groups, suggesting a culture of drinking within these groups. The postgraduate Economic & Management Sciences discipline, on the other hand, show the lowest consumption, which may reflect a change in priorities as students delve into their field deeper. A general increase in consumption from the first to third years is observed, possibly due to greater social integration and freedom. However, there’s a slight decrease or plateau by the fourth year, indicating a potential shift in priorities as students near graduation. This data is crucial for understanding student behavior and guiding university policies on alcohol education.
 
-Secondly, our analysis revealed a relationship between alcohol consumption and academic performance. Students with higher average GPAs tended to consume fewer alcoholic drinks per week. This inverse correlation suggests that consuming too much alcohol may negatively impact academic performance of the students, possibly due to reasons such as reduced study time and increased class absences resulting from hangovers or fatigue.
+Secondly, our analysis revealed a relationship between alcohol consumption and academic performance. Students with higher average GPAs tended to consume fewer alcoholic drinks per week. This inverse correlation suggests that excessive alcohol consumption may negatively impact students' academic performance, possibly due to reduced study time and increased class absences resulting from hangovers or fatigue.
 
 Thirdly, the influence of parents on students' drinking behavior was notable. Students whose parents disapproved of alcohol consumption generally reported lower levels of drinking. This finding underscores the role of parental attitudes and communication in shaping students' behaviors and choices.
+
+Overall the most important takeaway from this analysis is that alcohol consumption seems to rely on a variety of factors, from a student's major and year to their parents and partners. Thus, overall we believe that any alcohol policy shouldn't focus on just one factor but should take a multilateral approach and should attempt to change the underlying culture behind drinking in order to properly reduce it.
 
 The data provides valuable insights into the complex connections and correlations between alcohol consumption, academic performance, and parental influence among students. These findings highlight the importance of targeted interventions and support systems to address alcohol-related issues within the student population. Universities and policymakers can use these insights to develop programs that promote healthier lifestyles and academic success. By understanding the factors that contribute to alcohol consumption, stakeholders can create more effective strategies to mitigate its negative effects and support students in achieving their academic and personal goals.
 
