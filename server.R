@@ -69,6 +69,65 @@ server <- function(input, output, session) {
             axis.text.y = element_text(size = 12))
   })
   
+  data$Major[data$Major == "" | is.na(data$Major)] <- "Undecided"
+  data$Major <- as.factor(data$Major)
+  
+  data <- data %>%
+    filter(!is.na(Drinks_Per_Night_Out) & Drinks_Per_Night_Out != "",
+           !is.na(Relationship_With_Parents) & Relationship_With_Parents != "",
+           !is.na(Parental_Approval_Alcohol) & Parental_Approval_Alcohol != "")
+  
+  data$Relationship_With_Parents <- factor(data$Relationship_With_Parents, 
+                                           levels = c("Distant", "Fair", "Close", "Very close"))
+  data$Parental_Approval_Alcohol <- as.factor(data$Parental_Approval_Alcohol)
+  data$Romantic_Relationship <- as.factor(data$Romantic_Relationship)
+  
+  data <- data %>% filter(School_Year != "" & !is.na(School_Year))
+  data$School_Year <- as.factor(data$School_Year)
+  
+  convert_study_hours <- function(x) {
+    if (grepl("\\+", x)) {
+      return(8)  # If it contains '+', assume it's 8 or more hours
+    } else if (grepl("-", x)) {
+      parts <- as.numeric(unlist(strsplit(x, "-")))
+      return(mean(parts))  # Take the mean of the range if it contains '-'
+    } else {
+      return(as.numeric(gsub("\\D", "", x)))  # Extract numeric value otherwise
+    }
+  }
+  
+  # Apply the function to the column
+  data$Study_Hours_Per_Week <- sapply(data$Study_Hours_Per_Week, convert_study_hours)
+  # Convert relevant columns to numeric
+  data$Drinks_Per_Night_Out <- as.numeric(gsub("[^0-9.]", "", data$Drinks_Per_Night_Out))
+  data$Avg_GPA_2023 <- as.numeric(data$Avg_GPA_2023)
+  
+  # Create reactive data for filtering
+  filtered_data <- reactive({
+    data %>%
+      filter(Drinks_Per_Night_Out >= input$drinks_range[1] &
+               Drinks_Per_Night_Out <= input$drinks_range[2])
+  })
+  
+  # Plot for relationship between Drink Consumption, Study Hours, and Average GPA
+  output$scatterPlot <- renderPlot({
+    req(input$drinks_range)
+    
+    if (nrow(filtered_data()) == 0) {
+      plot.new()
+      text(0.5, 0.5, "No data available for the selected range", cex = 1.5)
+    } else {
+      ggplot(filtered_data(), aes(x = Drinks_Per_Night_Out, y = Study_Hours_Per_Week)) +
+        geom_point(aes(color = Avg_GPA_2023)) +
+        scale_color_gradient(low = "blue", high = "red") +
+        labs(title = "Relationship between Drink Consumption, Study Hours, and Average GPA",
+             x = "Drinks Per Night Out",
+             y = "Study Hours Per Week",
+             color = "Average GPA") +
+        theme_minimal()
+    }
+  })
+  
   # Parental relationship and approval data filtering
   output$barChartPpl <- renderPlot({
     filtered_ppl <- data %>% 
