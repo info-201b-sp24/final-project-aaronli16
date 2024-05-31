@@ -89,7 +89,7 @@ server <- function(input, output, session) {
         rows = 1, 
         colors = c("red"),
         legend_pos = "none",
-        title = "Average Drinks Consumed",
+        title = "Average # of Drinks Consumed Per Week",
         xlab = "1 square represents 1 drink"
       )
     }

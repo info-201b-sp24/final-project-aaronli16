@@ -33,16 +33,35 @@ ui <- navbarPage("Student Alcohol Consumption",
                  ),
                  tabPanel("Interpersonal Relationships",
                           fluidPage(
+                            tags$head(
+                                                      # Note the wrapping of the string in HTML()
+                              tags$style(HTML("
+                                @import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
+                                @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+                                h2 {
+                                  font-family: 'Yusei Magic', sans-serif;
+                                  text-shadow: 2px 2px 0px grey;
+                                }
+                                
+                                p {
+                                  font-family: 'Roboto', sans-serif;
+                                }
+                                
+                                body {
+                                  cursor: url('https://d1nhio0ox7pgb.cloudfront.net/_img/g_collection_png/standard/32x32/wine.png'),pointer;
+                                }
+                                "))
+                            ),
                             titlePanel("How the People Around Students Affect Alcohol Consumption"),
                             sidebarPanel(
-                              "Is the student's parent ok with them drinking alcohol?",
+                              p("Is the student's parent ok with them drinking alcohol?"),
                               switchInput(
                                 inputId = "parental_approval",
                                 onLabel = "Yes",
                                 offLabel = "No",
                                 offStatus = "danger"
                               ),
-                              "Is the student currently in a romantic relationship?",
+                              p("Is the student currently in a romantic relationship?"),
                               switchInput(
                                 inputId = "relationship_status",
                                 onLabel = "Yes",
