@@ -42,9 +42,16 @@ ui <- navbarPage("Student Alcohol Consumption",
                                 offLabel = "No",
                                 offStatus = "danger"
                               ),
+                              "Is the student currently in a romantic relationship?",
+                              switchInput(
+                                inputId = "relationship_status",
+                                onLabel = "Yes",
+                                offLabel = "No",
+                                offStatus = "danger"
+                              ),
                               sliderTextInput(
                                 inputId = "parental_relationship",
-                                label = "Your choice:",
+                                label = "How close is the student to their parents?",
                                 force_edges = TRUE,
                                 choices = c("Distant", "Fair", "Close", "Very close"),
                                 selected = "Close"

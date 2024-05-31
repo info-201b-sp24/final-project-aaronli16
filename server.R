@@ -25,6 +25,7 @@ server <- function(input, output, session) {
   data$Relationship_With_Parents <- factor(data$Relationship_With_Parents, 
                                            levels = c("Distant", "Fair", "Close", "Very close"))
   data$Parental_Approval_Alcohol <- as.factor(data$Parental_Approval_Alcohol)
+  data$Romantic_Relationship <- as.factor(data$Romantic_Relationship)
   
   data <- data %>% filter(School_Year != "" & !is.na(School_Year))
   data$School_Year <- as.factor(data$School_Year)
@@ -73,22 +74,25 @@ server <- function(input, output, session) {
     filtered_ppl <- data %>% 
       filter(
         Parental_Approval_Alcohol == ifelse(input$parental_approval, "Yes", "No"),
-        Relationship_With_Parents == input$parental_relationship
+        Relationship_With_Parents == input$parental_relationship,
+        Romantic_Relationship == ifelse(input$relationship_status, "Yes", "No")
       )
     
     avg_drinks <- round(mean(filtered_ppl$Drinks_Per_Night_Out, na.rm = TRUE), 1)
     
     if (is.na(avg_drinks) || avg_drinks == 0) {
-      avg_drinks <- 0
+      plot.new()
+      text(0.5, 0.5, "No drinks consumed on average", cex = 1.5)
+    } else {
+      waffle(
+        parts = c('Drinks' = avg_drinks), 
+        rows = 1, 
+        colors = c("red"),
+        legend_pos = "none",
+        title = "Average Drinks Consumed",
+        xlab = "1 square represents 1 drink"
+      )
     }
-    waffle(
-      parts = c('Drinks' = avg_drinks), 
-      rows = 1, 
-      colors = c("red"),
-      legend_pos = "none",
-      title = "Average Drinks Consumed",
-      xlab = "1 square represents 1 drink"
-    )
   })
 
 }
