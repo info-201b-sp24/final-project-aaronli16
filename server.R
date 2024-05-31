@@ -57,16 +57,16 @@ server <- function(input, output, session) {
   
   output$barChartMajor <- renderPlot({
     ggplot(filtered_data(), aes(x = Major, y = Average_Drinks_Per_Week, fill = School_Year)) +
-      geom_bar(stat = "identity", position = "dodge") +
+      geom_bar(stat = "identity", position = "dodge", color = "black") +
       theme_minimal() +
+      scale_fill_manual(values = c("1st Year" = "#1f77b4", "2nd Year" = "#ff7f0e", "3rd Year" = "#2ca02c", "4th Year" = "#d62728", "Postgraduate" = "#808080")) +
       labs(title = "Average Number of Drinks Per Week by Major and School Year",
            x = "Major", y = "Average Drinks Per Week") +
       theme(axis.title.x = element_text(size = 15),
             axis.title.y = element_text(size = 15),
             plot.title = element_text(size = 25, face = "bold"),
             axis.text.x = element_text(size = 12, angle = 45, hjust = 1),
-            axis.text.y = element_text(size = 12)) +
-      scale_fill_brewer(palette = "Pastel1")
+            axis.text.y = element_text(size = 12))
   })
   
   # Parental relationship and approval data filtering
