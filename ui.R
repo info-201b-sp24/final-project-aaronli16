@@ -4,7 +4,6 @@ ui <- navbarPage("Student Alcohol Consumption",
   tabPanel("Introduction",
     fluidPage(
       titlePanel("Student Alcohol Consumption: At a Glance"),
-      # p("Abstract: This study analyzes student alcohol consumption data to identify patterns and trends..."),
       p("This is our study on 'Student Alcohol Consumption: At a Glance'. This project that we did aimed to analyze the patterns and trends of alcohol consumption by students based on many factors for example their major, academic performance, and parental influence. The data for this study was sourced from a publicly available dataset on Kaggle, titled 'Student Alcohol Consumption,' which contains responses from students regarding their drinking habits, academic performance, and various personal and demographic factors which they got through surveys."),
       p("The major questions we seek to answer through this analysis are:"),
       tags$ul(
@@ -16,7 +15,7 @@ ui <- navbarPage("Student Alcohol Consumption",
       p("It's important to consider some ethical questions and limitations associated with this dataset. The data is self-reported, which may introduce biases or inaccuracies. Also, the sensitive nature of personal information requires careful handling to ensure privacy and confidentiality."),
       p("For a more detailed exploration of the dataset that we used for our findings, please navigate through the interactive pages of this Shiny application. We hope this project not only provides valuable insights but also encourages further discussion and research on the impact of alcohol consumption on students' academic and personal lives."),
       a(href = "https://www.kaggle.com/datasets/joshuanaude/url", "Kaggle Dataset: Student Alcohol Consumption"),
-      img(src = "college-students-toasting-over-beer.jpeg", height = "300px", width = "500px")
+      img(src = "https://github.com/info-201b-sp24/final-project-aaronli16/blob/4e3aca397f291df23f0a2ecb2af2d7d72a7b6bbf/college-students-toasting-over-beer.jpeg?raw=true", height = "300px", width = "500px")
     )
   ),
   tabPanel("Major and School Year",
@@ -36,7 +35,7 @@ ui <- navbarPage("Student Alcohol Consumption",
                )
              )
            )
-  )
+  ),
   tabPanel("Conclusion",
            fluidPage(
              titlePanel("Key Takeaways"),
