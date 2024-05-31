@@ -83,6 +83,32 @@ ui <- navbarPage("Student Alcohol Consumption",
                             )
                           )
                  ),
+                 tabPanel("Academic Performance",
+                          fluidPage(
+                            titlePanel("GPA and Classes Missed From Alcohol"),
+                            p("How does alcohol consumption affect a student's performance in school? The line plot attempts to graph the relationship between alcohol consumption and classes missed per week. Additionally, the controls on the left allows you to filter for GPA and Classes failed."),
+                            sidebarPanel(
+                              sliderInput(
+                                inputId = "GPA",
+                                label = "Choose a Range of GPAs",
+                                min = 0, max = 100,
+                                value = c(0, 100),
+                                ticks = TRUE,
+                                dragRange = TRUE
+                              ),
+                              sliderTextInput(
+                                inputId = "ClassFailed",
+                                label = "Choose a Range of Classes Failed",
+                                force_edges = TRUE,
+                                choices = c("1", "2", "3", "4+"),
+                                selected = c("1", "4+")
+                              )
+                            ),
+                            mainPanel(
+                              plotOutput("linePerf")
+                            )
+                          )
+                 ),
                  tabPanel("Conclusion",
                           fluidPage(
                             titlePanel("Key Takeaways"),

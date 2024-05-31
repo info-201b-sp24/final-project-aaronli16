@@ -20,7 +20,10 @@ server <- function(input, output, session) {
   data <- data %>%
     filter(!is.na(Drinks_Per_Night_Out) & Drinks_Per_Night_Out != "",
            !is.na(Relationship_With_Parents) & Relationship_With_Parents != "",
-           !is.na(Parental_Approval_Alcohol) & Parental_Approval_Alcohol != "")
+           !is.na(Parental_Approval_Alcohol) & Parental_Approval_Alcohol != "",
+           !is.na(Avg_GPA) & Avg_GPA != "",
+           !is.na(Classes_Missed_Per_Week) & Classes_Missed_Per_Week != "",
+           !is.na(Classes_Failed) & Classes_Failed != "")
   
   data$Relationship_With_Parents <- factor(data$Relationship_With_Parents, 
                                            levels = c("Distant", "Fair", "Close", "Very close"))
@@ -31,6 +34,28 @@ server <- function(input, output, session) {
   data$School_Year <- as.factor(data$School_Year)
   
   data$Drinks_Per_Night_Out <- as.numeric(sapply(data$Drinks_Per_Night_Out, function(x) {
+    if (grepl("-", x)) {
+      parts <- strsplit(x, "-")[[1]]
+      return(mean(as.numeric(parts)))
+    } else if (grepl("\\+", x)) {
+      return(as.numeric(gsub("\\+", "", x)))
+    } else {
+      return(as.numeric(x))
+    }
+  }))
+  
+  data$Classes_Missed_Per_Week <- as.numeric(sapply(data$Classes_Missed_Per_Week, function(x) {
+    if (grepl("-", x)) {
+      parts <- strsplit(x, "-")[[1]]
+      return(mean(as.numeric(parts)))
+    } else if (grepl("\\+", x)) {
+      return(as.numeric(gsub("\\+", "", x)))
+    } else {
+      return(as.numeric(x))
+    }
+  }))
+  
+  data$Classes_Failed <- as.numeric(sapply(data$Classes_Failed, function(x) {
     if (grepl("-", x)) {
       parts <- strsplit(x, "-")[[1]]
       return(mean(as.numeric(parts)))
@@ -66,6 +91,48 @@ server <- function(input, output, session) {
             axis.title.y = element_text(size = 15),
             plot.title = element_text(size = 25, face = "bold"),
             axis.text.x = element_text(size = 12, angle = 45, hjust = 1),
+            axis.text.y = element_text(size = 12))
+  })
+  
+  # acad perf stuff
+  
+  data_perf <- data %>%
+    group_by(Avg_GPA, Classes_Failed, Drinks_Per_Night_Out) %>%
+    summarise(Average_Classes_Missed_Per_Week = mean(Classes_Missed_Per_Week, na.rm = TRUE))
+  
+  filtered_data_perf <- reactive({
+    print(input$GPA)
+    
+    
+    ClassFailednum <- as.numeric(sapply(input$ClassFailed, function(x) {
+      if (grepl("\\+", x)) {
+        return(as.numeric(gsub("\\+", "", x)))
+      } else {
+        return(as.numeric(x))
+      }
+    }))
+    
+    print(ClassFailednum)
+    
+    data_perf %>%
+      filter(Avg_GPA >= input$GPA[1] & Avg_GPA <= input$GPA[2],
+             Classes_Failed %in% ClassFailednum)
+  })
+  
+  
+  
+  output$linePerf <- renderPlot({
+    ggplot(filtered_data_perf(), aes(x = Drinks_Per_Night_Out, y = Average_Classes_Missed_Per_Week)) +
+      geom_point(color = "#ff7f0e", size = 3, shape = 21, fill = "white") +
+      geom_smooth(method = "lm", color = "#1f77b4", size = 1.2) +
+      theme_minimal() +
+      labs(title = "Average Classes Missed Per Week vs. Drinks Per Week",
+           x = "Average Drinks Per Week",
+           y = "Average Classes Missed Per Week") +
+      theme(axis.title.x = element_text(size = 15),
+            axis.title.y = element_text(size = 15),
+            plot.title = element_text(size = 25, face = "bold"),
+            axis.text.x = element_text(size = 12),
             axis.text.y = element_text(size = 12))
   })
   

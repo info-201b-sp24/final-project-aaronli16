@@ -5,7 +5,7 @@ account: sunev
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 12101252
-bundleId: 8682852
+bundleId: 8685948
 url: https://sunev.shinyapps.io/final-project-aaronli16/
 version: 1
 asMultiple: FALSE
