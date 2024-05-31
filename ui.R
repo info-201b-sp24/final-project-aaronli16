@@ -31,18 +31,8 @@ ui <- navbarPage("Student Alcohol Consumption",
                               plotOutput("barChartMajor")
                             )
                           )
-                 ),tabPanel("Average Drinks Per Week by Study Hours and GPA",
-                            fluidPage(
-                              titlePanel("Relationship between Drink Consumption, Study Hours, and Average GPA"),
-                              sidebarPanel(
-                                sliderInput("drinks_range", "Select drinks range:",
-                                            min = 0, max = 10, value = c(0, 10))
-                              ),
-                              mainPanel(
-                                plotOutput("scatterPlot")
-                              )
-                            )
-                 ),tabPanel("Interpersonal Relationships",
+                 ),
+                 tabPanel("Interpersonal Relationships",
                           fluidPage(
                             tags$head(
                                                       # Note the wrapping of the string in HTML()
