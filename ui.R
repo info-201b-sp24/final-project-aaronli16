@@ -2,44 +2,15 @@ library(shiny)
 library(shinyWidgets)
 
 ui <- navbarPage("Student Alcohol Consumption",
-<<<<<<< HEAD
-  tabPanel("Introduction",
-    fluidPage(
-      titlePanel("Student Alcohol Consumption: At a Glance"),
-      p("Abstract: This study analyzes student alcohol consumption data to identify patterns and trends...")
-    )
-  ),
-  tabPanel("Alcohol Consumption by Major and School Year",
-           fluidPage(
-             titlePanel("Average Drinks Per Week by Major and School Year"),
-             sidebarLayout(
-               sidebarPanel(
-                 checkboxGroupInput("selected_majors", "Select Majors:",
-                                    choices = NULL,
-                                    selected = NULL),
-                 checkboxGroupInput("selected_years", "Select School Years:",
-                                    choices = NULL,
-                                    selected = NULL)
-               ),
-               mainPanel(
-                 plotOutput("barChart"),
-                 HTML('<p style="font-size:18px;"><strong>Description:</strong> By visualizing these trends, we can identify student groups that may benefit from targeted health and wellness programs. High consumption in fields like Engineering and AgriSciences suggests a need for stress management and social responsibility initiatives. Conversely, understanding the low consumption in Law, Medicine, and Sciences can provide insights into how academic pressures and professional expectations shape student behaviors. This analysis is crucial for university administrators and student services to develop tailored interventions, promoting a healthier campus environment.</p>
-                      <p style="font-size:18px;"><strong>How to Use the Graph:</strong> The bar chart below allows you to explore the average number of alcoholic drinks consumed per week by students, categorized by their major and school year. Use the checkboxes on the left to select specific majors and school years you are interested in. The bars will update dynamically to reflect your selections, providing a clear visual comparison across different groups. This interactive feature helps you focus on particular demographics and understand their drinking patterns more precisely.</p>')
-               )
-             )
-           )
-  )
-)
-=======
                  tabPanel("Introduction",
                           fluidPage(
                             titlePanel("Student Alcohol Consumption: At a Glance"),
                             p("This is our study on 'Student Alcohol Consumption: At a Glance'. This project aims to analyze the patterns and trends of alcohol consumption by students based on factors like their major, academic performance, and parental influence. The data for this study is sourced from a publicly available dataset on Kaggle, 'Student Alcohol Consumption,' containing responses from students regarding their drinking habits, academic performance, and various personal and demographic factors via surveys."),
                             p("The major questions we seek to answer through this analysis are:"),
                             tags$ul(
-                              tags$li("How does alcohol consumption correlate with a student's major?"),
-                              tags$li("How does alcohol consumption correlate with grades in each major?"),
-                              tags$li("How do parents affect a student’s alcohol consumption?")
+                              tags$li("How does alcohol consumption correlate with a student's major and year?"),
+                              tags$li("How does alcohol consumption affect a student's performance in school?"),
+                              tags$li("How do the people around a student affect a student’s alcohol consumption?")
                             ),
                             p("The dataset provides a comprehensive view of students' backgrounds, study habits, and social behaviors. By examining these variables, we hope to uncover insights into how different factors influence alcohol consumption among university students."),
                             p("It's important to consider some ethical questions and limitations associated with this dataset. The data is self-reported, which may introduce biases or inaccuracies. Also, the sensitive nature of personal information requires careful handling to ensure privacy and confidentiality."),
@@ -51,6 +22,7 @@ ui <- navbarPage("Student Alcohol Consumption",
                  tabPanel("Major and School Year",
                           fluidPage(
                             titlePanel("Average Drinks Per Week by Major and School Year"),
+                            p("How does alcohol consumption correlate with a student's major and year? The barchart below seeks to figure out how alcohol consumption is related to a students major and year. Using the checkboxes you can filter for certain years or majors."),
                             sidebarPanel(
                               checkboxGroupInput("selected_majors", "Select Majors:", choices = NULL, selected = NULL),
                               checkboxGroupInput("selected_years", "Select School Years:", choices = NULL, selected = NULL)
@@ -82,6 +54,7 @@ ui <- navbarPage("Student Alcohol Consumption",
                                 "))
                             ),
                             titlePanel("How the People Around Students Affect Alcohol Consumption"),
+                            p("How do the people around a student affect a student’s alcohol consumption? The pictogram below seeks to display a student's drinking habits depending on the interpersonal relationships they have. Based on the controls below you can filter students out to find trends in how parents or partners may affect alcohol consumption."),
                             sidebarPanel(
                               p("Is the student's parent ok with them drinking alcohol?"),
                               switchInput(
@@ -122,4 +95,3 @@ ui <- navbarPage("Student Alcohol Consumption",
                           )
                  )
 )
->>>>>>> a493faab233790980d9b80d8b27a8f533446aef2
